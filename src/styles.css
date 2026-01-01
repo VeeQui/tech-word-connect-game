@@ -1,0 +1,38 @@
+
+
+body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial; margin: 0; padding: 20px; }
+.app { max-width: 800px; margin: 0 auto; }
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  50% { transform: translateX(4px); }
+  75% { transform: translateX(-4px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes lock {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.05); }
+}
+
+@font-face {
+  font-family: 'MyGameFont';
+/*  src: url('./assets/fonts/Mansalva-Regular.ttf') format('truetype');*/
+ src: url('./assets/fonts/Jura-VariableFont_wght.ttf') format('truetype');
+}
+.draggable-word {
+  touch-action: none; 
+  user-select: none;
+  -webkit-user-select: none; /* For Safari/iPhone */
+}
+/* Hide the message by default */
+.orientation-guard {
+  display: none;
+}
+
+/* If the device is in Portrait (vertical), show the message */
+@media screen and (orientation: portrait) {
+  .orientation-guard {
+    display: block;
+  }
+}
