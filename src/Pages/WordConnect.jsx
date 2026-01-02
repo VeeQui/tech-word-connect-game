@@ -63,6 +63,13 @@ const isExiting = React.useRef(false); // <--- ADD THIS LINE
 const initLevel = useCallback(() => {
   const currentLevel = LEVELS[levelIndex];
   if (!currentLevel) return;
+  
+  // --- THE GUARD ---
+  // Explicitly clear state BEFORE calculating new grid
+  setLockedGroups([]); 
+  setIsActive(true);
+  setSeconds(0);
+  // -----------------
 
   // 1. Shuffle all available groups in this level and pick 5
   const shuffledPool = [...currentLevel.groups].sort(() => Math.random() - 0.5);
