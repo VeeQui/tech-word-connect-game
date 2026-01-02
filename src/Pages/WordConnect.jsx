@@ -20,17 +20,7 @@ const GROUP_SIZE = 4;
 export default function WordConnect() {
 const isExiting = React.useRef(false); // <--- ADD THIS LINE
   /* ================= STATE ================= */
-useEffect(() => {
-  const viewport = document.querySelector('meta[name="viewport"]');
-  
-  // If the screen is narrow (Portrait), zoom out. 
-  // If wide (Landscape), stay at normal scale.
-  if (window.innerHeight > window.innerWidth) {
-    viewport.setAttribute('content', 'width=650, initial-scale=0.6, user-scalable=yes');
-  } else {
-    viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, user-scalable=yes');
-  }
-}, []);
+
   //sound
   const [isMuted, setIsMuted] = useState(() => {
     const saved = localStorage.getItem('wordConnectMuted');

@@ -26,7 +26,7 @@ export const LEVELS = [
       { title: "Διαδίκτυο", solution: ["Client-Server", "TCP/IP", "Παγκόσμιο", "ISP"] },
       { title: "Είδη Δικτύων Υπολογιστών", solution: ["Ασύρματο", "Τοπικό", "Ευρείας Περιοχής", "Σώματος"] },
       { title: "Ενεργός εξοπλισμός δικτύου", solution: ["Router", "Switch", "Access Point", "MODEM"] },
-      { title: "Υπηρεσίες Διαδικτύου", solution: ["WWW", "email", "FTP", "Chat & Messaging"] },
+      { title: "Υπηρεσίες Διαδικτύου", solution: ["Παγκόσμιος Ιστός", "email", "FTP", "Chat & Messaging"] },
       { title: "Φυλλομετρητής", solution: ["https://", "Ιστοσελίδα", "Μηχανή Αναζήτησης", "Διεύθυνση URL"] },
       { title: "Ασύρματη σύνδεση", solution: ["WiFi", "Bluetooth", "Δορυφορική", "NFC"] },
       { title: "Ενσύρματη σύνδεση", solution: ["USB", "UTP", "Firewire", "Οπτική ίνα"] },
