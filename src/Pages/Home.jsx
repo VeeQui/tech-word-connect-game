@@ -5,7 +5,7 @@ import "../styles.css";
 export default function Home() {
   return (
     <div style={{ fontFamily: "myGameFont",borderRadius: "8px", border:"solid",textAlign: "center", background: "white" }}>
-      <h1 style={{fontColor:"purple"}}>Πόσο καλά ξέρεις Πληροφορική;</h1>
+      <h1 style={{color:"purple"}}>Πόσο καλά ξέρεις Πληροφορική;</h1>
       <p>Συνδύασε τέσσερις λέξεις, για να βρεις την κατηγορία.</p>
        <p>Μπορείς να βρεις και τις πέντε* κατηγορίες;</p>
 
@@ -27,7 +27,7 @@ export default function Home() {
      >
         Παίξε!
       </Link>
-<p></p>
+	<br />
        <p>* Το κάθε επίπεδο έχει συνολικά 11 κατηγορίες. Με κάθε ανανέωση επιλέγονται 5 τυχαίες.</p>
 
     </div>

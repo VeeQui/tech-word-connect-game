@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"; // <-- Added useEffect
 import WordGrid from "./WordGrid";
 import WordTile from "./WordTile";
 
-// --- Color Bank & Utilities ---
+// --- Color Bank  ---
 
 const ALPHA = 1;
 
@@ -17,27 +17,10 @@ const COLOR_BANK = [
   `rgba(230, 18, 61, ${ALPHA})`, //cherry red */
 ];
 
-const getUniqueColor = (usedColors) => {
-  const availableColors = COLOR_BANK.filter(
-    (color) => !usedColors.includes(color)
-  );
-  if (availableColors.length === 0) {
-    return COLOR_BANK[0];
-  }
-  const randomIndex = Math.floor(Math.random() * availableColors.length);
-  return availableColors[randomIndex];
-};
-// --- End Utilities ---
+// --- End color bank ---
 
 
-// ... (keep your existing imports and color logic)
-
-// --- End Utilities ---
-
-
-// ... (keep your existing imports and color logic)
-
-export default function GameBoard({ slots, bank, lockedGroups, groupTitles, onStartDrag, hoveredSlot, selectedGroups}) { // Change onDrop to onStartDrag
+export default function GameBoard({ slots, lockedGroups, groupTitles, onStartDrag, hoveredSlot, selectedGroups}) { // Change onDrop to onStartDrag
   const [groupColors, setGroupColors] = useState({});
 
   useEffect(() => {
@@ -130,10 +113,4 @@ const styles = {
   WebkitTapHighlightColor: "transparent", 
 },
 
-  bank: {
-    display: "flex",
-    gap: 0,
-    flexWrap: "wrap",
-    justifyContent: "center",
-  },
 };

@@ -287,7 +287,9 @@ return (
     		alt="Hint" 
     		style={styles.everyIconStyle} />
         </button>
-        <button 
+   
+{/* shuffle button not shown
+    <button 
             title="Ανακάτεμα των λέξεων" 
             onClick={()=> {playSound(clickSound);handleShuffle()}} 
             style={styles.Btn}>
@@ -295,7 +297,7 @@ return (
     		src={shuffleIcon} 
     		alt="Ανακάτεμα" 
     		style={styles.everyIconStyle} />
-        </button> 
+        </button> */}
 	<button 
 	  title={isMuted ? "Ενεργοποίηση ήχου" : "Σίγαση ήχου"}
 	  onClick={() => {
@@ -331,11 +333,8 @@ return (
         hoveredSlot={hoveredSlot}
       />
 </div>
-      {/* 3. The Hint/Info Button */}
-      <div style={styles.infoContainer}>
-   </div>
-
-      {/* 4. The Hint Modal (Pop-up) */}
+ 
+      {/* 3. The Hint Modal (Pop-up) */}
       {showHints && (
         <div  style={styles.modalOverlay} onClick={() => setShowHints(false)}>
           <div style={styles.modalContent} onClick={(e) => e.stopPropagation()}>
@@ -356,7 +355,7 @@ return (
         </div>
       )}
 
-      {/* 5. Victory Modal */}
+      {/* 4. Victory Modal */}
       {victory && (
         <VictoryModal 
           onRestart={handleNextLevel} 
@@ -384,7 +383,7 @@ const styles = {
   margin: "auto",
   right: "0px",
   left: "0px",
-    align: "center",
+ //followed by the next two this line is redundant->   align: "center",
     justifyContent: "space-between",
     alignItems: "center",
     padding: "4px 4px",
@@ -398,19 +397,6 @@ const styles = {
     WebkitTapHighlightColor: "transparent",
 
   },
-   infoContainer: {
-    fontFamily: "myGameFont",
-    display: "flex",
-    justifyContent: "center",
-    padding: "10px",
-    marginTop: "10px",
-    userSelect: "none",
-    WebkitUserSelect: "none",
-    pointerEvents: "none", 
-    msUserSelect: "none",
-    MozUserSelect: "none",
-    WebkitTapHighlightColor: "transparent",
-},
   Btn: {
     fontFamily: "myGameFont",
     color:"white",

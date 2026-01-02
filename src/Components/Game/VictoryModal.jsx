@@ -79,6 +79,7 @@ const styles = {
     fontFamily: "inherit",
   },
   button: {
+    fontFamily: "myGameFont",
     padding: "12px 24px",
     fontSize: "18px",
     backgroundColor: "purple", // Purple theme
