@@ -325,7 +325,7 @@ return (
 	  />
 	</button>
 	</div>
-        <h3>Επίπεδο {levelIndex + 1} | Χρόνος: {seconds}s</h3>
+        <div><h3>Επίπεδο {levelIndex + 1}: {LEVELS[levelIndex]?.levelTitle}</h3></div><div> <h3>Χρόνος: {seconds}s</h3></div>
 
         </div>
 
@@ -390,6 +390,7 @@ const styles = {
   margin: "auto",
   right: "0px",
   left: "0px",
+fontSize: "0.9rem",
  //followed by the next two this line is redundant->   align: "center",
     justifyContent: "space-between",
     alignItems: "center",

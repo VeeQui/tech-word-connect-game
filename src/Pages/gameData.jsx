@@ -2,6 +2,7 @@
 export const LEVELS = [
   {
     id: 1,
+    levelTitle: "Υλικό και Λογισμικό", // Title for Level 1
     // Provide a large pool of groups here
     groups: [
       { title: "Μονάδες εισόδου", solution: ["Web κάμερα", "Πληκτρολόγιο", "Ποντίκι", "Σαρωτής"] },
@@ -19,6 +20,7 @@ export const LEVELS = [
   },
   {
     id: 2,
+    levelTitle: "Δίκτυα και Διαδίκτυο", // Title for Level 2
     groups: [
       { title: "Δικτυακές συσκευές", solution: ["Η/Υ", "Έξυπνες συσκευές", "Εκτυπωτές", "Tablet"] },
       { title: "Δίκτυο Κινητής Τηλεφωνίας", solution: ["Κυψελωτό", "Σταθμός βάσης", "Ραδιοκύματα", "Κινητό"] },
