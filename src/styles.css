@@ -31,8 +31,8 @@ body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial; margin:
 }
 
 /* If the device is in Portrait (vertical), show the message */
-@media screen and (orientation: portrait) {
+/*@media screen and (orientation: portrait) {
   .orientation-guard {
     display: block;
   }
-}
+}*/
