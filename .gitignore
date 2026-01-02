@@ -1,4 +1,26 @@
 node_modules/
 dist/
 .env
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Mac System Files (Expanding on your .DS_Store)
 .DS_Store
+.AppleDouble
+.LSOverride
+Icon
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build outputs (Adding to your dist/)
+build/
+out/
