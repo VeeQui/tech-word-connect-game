@@ -369,7 +369,7 @@ return (
           buttonText={levelIndex === LEVELS.length - 1 ? "Παίξε από την αρχή" : "Επόμενο Επίπεδο"}
         />
       )} 
-{/*
+
 {/* Orientation Guard: Only shows when phone is held vertically */}
 <div className="orientation-guard">
   <div style={styles.rotateMessage}>
@@ -377,7 +377,7 @@ return (
     <h2>Παρακαλώ γυρίστε το κινητό σας οριζόντια</h2>
     <p>(Landscape Mode)</p>
   </div>
-</div>  */}    
+</div>      
     </>
   );
 }
