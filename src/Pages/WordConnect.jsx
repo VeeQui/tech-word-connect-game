@@ -401,6 +401,8 @@ const styles = {
     msUserSelect: "none",
     MozUserSelect: "none",
     WebkitTapHighlightColor: "transparent",
+  zoom: window.innerWidth < 650 ? "0.8" : "1",  //width (650) should be adjusted to game container
+  WebkitZoom: window.innerWidth < 650 ? "0.8" : "1", // Specific for Safari - width (650) should be adjusted to game container
   },
   Btn: {
     fontFamily: "myGameFont",
