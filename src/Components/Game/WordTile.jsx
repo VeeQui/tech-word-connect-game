@@ -34,13 +34,13 @@ const styles = {
     borderColor: "lightgray",
     textAlign: "center",
     whiteSpace: "pre-line",
-    boxShadow: "0 3px 7px rgba(0,0,0,0.2)", // Softer shadow for cleaner look
+    boxShadow: "3px 3px 0px rgba(0,0,0,0.2)", // Softer shadow for cleaner look
     userSelect: "none",
     WebkitUserSelect: "none",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    fontSize: "clamp(12px, 2.5vw, 17px)", // Fluid font size
+    fontSize: "clamp(12px, 2.5vw, 15px)", // Fluid font size
     fontFamily: "myGameFont",             // Added for consistency
     transition: "transform 0.1s ease, background 0.15s ease", 
     cursor: 'grab',

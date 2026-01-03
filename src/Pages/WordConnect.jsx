@@ -15,10 +15,10 @@ import clickSound from "../assets/sounds/click.mp3";
 
 
 const ACTIVE_ROW_COUNT = 5; 
-const GROUP_SIZE = 4;
+const GROUP_SIZE = 4;  //if more words per group then the container width must be adjusted
 
 export default function WordConnect() {
-const isExiting = React.useRef(false); // <--- ADD THIS LINE
+const isExiting = React.useRef(false); 
   /* ================= STATE ================= */
 
   //sound
@@ -114,7 +114,7 @@ const initLevel = useCallback(() => {
       }
    });
        if (locks.length > lockedGroups.length) {
-         playSound(successSfx); // <--- Play happy chime
+         playSound(successSfx); // Play happy chime
       }
     setLockedGroups(locks);
   };
@@ -274,8 +274,7 @@ return (
                 playSound(clickSound); 
     		// Put everything that changes the page inside the timeout
     		setTimeout(() => {
-	        //window.location.reload();  
-		initLevel();}, 200);
+         	initLevel();}, 200);
   		}}               
 		style={styles.Btn}>
 		<img 
@@ -335,7 +334,7 @@ return (
         slots={slots} 
         lockedGroups={lockedGroups} 
         groupTitles={selectedGroups.map(g => g.title)}
-        selectedGroups={selectedGroups} // Pass this down
+        selectedGroups={selectedGroups} 
         onStartDrag={handleStartDrag}
         hoveredSlot={hoveredSlot}
       />
@@ -370,6 +369,7 @@ return (
           buttonText={levelIndex === LEVELS.length - 1 ? "Παίξε από την αρχή" : "Επόμενο Επίπεδο"}
         />
       )} 
+{/*
 {/* Orientation Guard: Only shows when phone is held vertically */}
 <div className="orientation-guard">
   <div style={styles.rotateMessage}>
@@ -377,7 +377,7 @@ return (
     <h2>Παρακαλώ γυρίστε το κινητό σας οριζόντια</h2>
     <p>(Landscape Mode)</p>
   </div>
-</div>      
+</div>  */}    
     </>
   );
 }
@@ -387,11 +387,10 @@ const styles = {
     maxHeight: "30px",
     maxWidth: "632px",
     display: "flex",
-  margin: "auto",
-  right: "0px",
-  left: "0px",
-fontSize: "0.9rem",
- //followed by the next two this line is redundant->   align: "center",
+    margin: "auto",
+    right: "0px",
+    left: "0px",
+    fontSize: "0.9rem",
     justifyContent: "space-between",
     alignItems: "center",
     padding: "4px 4px",
@@ -399,11 +398,9 @@ fontSize: "0.9rem",
     borderRadius: "5px",
     marginBottom: "5px",
     WebkitUserSelect: "none",
-//    pointerEvents: "none", 
     msUserSelect: "none",
     MozUserSelect: "none",
     WebkitTapHighlightColor: "transparent",
-
   },
   Btn: {
     fontFamily: "myGameFont",
@@ -415,9 +412,8 @@ fontSize: "0.9rem",
     cursor: "pointer",
     fontSize: "14px",
     fontWeight: "bold",
-transition: "transform 0.1s active",
-  outline: "none",
-
+  transition: "transform 0.1s active",
+    outline: "none",
 },
   modalOverlay: {
     position: "fixed",
@@ -467,7 +463,7 @@ rotateMessage: {
   position: 'fixed',
   top: 0, left: 0,
   width: '100vw', height: '100vh',
-  backgroundColor: 'purple', // Purple to match your theme
+  backgroundColor: 'purple', 
   color: 'white',
   display: 'flex',
   flexDirection: 'column',
@@ -483,7 +479,7 @@ gameBoardContainer: {
   maxWidth: "632px",
   margin: "0 auto",
   /* The "Safe Zoom" */
-  zoom: window.innerWidth < 650 ? "0.8" : "1",
-  WebkitZoom: window.innerWidth < 650 ? "0.8" : "1", // Specific for Safari
+  zoom: window.innerWidth < 650 ? "0.8" : "1",  //width (650) should be adjusted to game container
+  WebkitZoom: window.innerWidth < 650 ? "0.8" : "1", // Specific for Safari - width (650) should be adjusted to game container
 }
 };

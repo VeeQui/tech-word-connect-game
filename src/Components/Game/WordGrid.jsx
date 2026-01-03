@@ -2,13 +2,13 @@ import React from "react";
 import WordTile from "./WordTile";
 
 const staticStyles = {
-  wrapper: { marginBottom: 12,
+  wrapper: { marginBottom: 5,
 //zoom: window.innerWidth < 600 ? "0.7" : "1",  ////////////////////////////
 },
   row: {
     position: "relative",
     display: "flex",
-    gap: 12,
+    gap: 5,
     justifyContent: "center",
 flexWrap: "nowrap", // Force them to stay in one line
   },
