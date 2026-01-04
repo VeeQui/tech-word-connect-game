@@ -175,7 +175,9 @@ const initLevel = useCallback(() => {
       transform: 'scale(1.1)',
       boxShadow: '0 10px 20px rgba(0,0,0,0.3)',
       cursor: 'grabbing',
-
+// This is the specific fix for Safari:
+  transform: 'scale(1.1) translateZ(0)', 
+  WebkitTransform: 'scale(1.1) translateZ(0)',
     });
     document.body.appendChild(ghost);
     originalTile.style.opacity = '0.3';
@@ -187,8 +189,8 @@ const initLevel = useCallback(() => {
 
   // 2. Adjust the positioning math
   // We divide by the scale to "normalize" the mouse movement
-  ghost.style.left = `${moveEvent.clientX - (rect.width * scale) / 2}px`;
-  ghost.style.top = `${moveEvent.clientY - (rect.height * scale) / 2}px`;
+  ghost.style.left = `${moveEvent.clientX - (rect.width * scale) / 2 +2}px`;
+  ghost.style.top = `${moveEvent.clientY - (rect.height * scale) / 2 +2}px`;
       const elementAtPoint = document.elementFromPoint(moveEvent.clientX, moveEvent.clientY);
       const targetTile = elementAtPoint?.closest('[data-row]');
       if (targetTile) {
