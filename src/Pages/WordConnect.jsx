@@ -175,9 +175,12 @@ const initLevel = useCallback(() => {
        boxShadow: '0 10px 20px rgba(0,0,0,0.3)',
       cursor: 'grabbing',
 // This is the specific fix for Safari:
-  transform: 'scale(1.1) translateZ(0)', 
-  WebkitTransform: 'scale(1.1) translateZ(0)',
-    });
+opacity:'0.99',
+ WebkitTransform: 'scale(1.1) translateZ(0)',
+  transform: 'scale(1.1) translateZ(0)',
+  WebkitBackfaceVisibility: 'hidden',
+  WebkitPerspective: '1000',
+   });
     document.body.appendChild(ghost);
     originalTile.style.opacity = '0.3';
 
