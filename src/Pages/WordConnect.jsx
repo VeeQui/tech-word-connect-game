@@ -488,4 +488,5 @@ gameBoardContainer: {
   margin: "0 auto",
 transform: window.innerWidth < 650 ? `scale(${window.innerWidth / 650})` : "scale(1)",
   transformOrigin: "top center",
+}
 };
