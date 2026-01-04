@@ -189,7 +189,7 @@ const initLevel = useCallback(() => {
   
   // Ensure z-index is extremely high
   zIndex: '99999',
-}
+
 
     });
     document.body.appendChild(ghost);
