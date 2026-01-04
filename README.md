@@ -66,6 +66,12 @@ build/
 
 ---
 
+## Known Issues
+* **Safari Scaling:** On Safari (Desktop & Mobile), the dragged tile may become invisible when the browser zoom or board scale is increased. This is a known rendering conflict between CSS `transform: scale()` and `fixed` positioning. 
+* **Workaround:** Play at 100% zoom or use Chrome/Firefox for the best experience.
+
+---
+
 ## 📄 License
 
 This project is available for educational use. Please check the [LICENSE](https://www.google.com/search?q=LICENSE) file for more details.
@@ -149,6 +155,12 @@ Thumbs.db
 node_modules/
 dist/
 ```
+
+---
+
+## Γνωστά Θέματα (Known Issues)
+* **Safari Scaling:** Σε προγράμματα περιήγησης Safari (Desktop & Mobile), το πλαίσιο που σύρεται ενδέχεται να μην εμφανίζεται όταν το zoom του browser ή η κλίμακα (scale) του παιχνιδιού είναι αυξημένη. Πρόκειται για μια γνωστή διένεξη κατά την απόδοση (rendering conflict) μεταξύ της ιδιότητας CSS `transform: scale()` και του position: `fixed`.
+* **Εναλλακτική Λύση:** Για την καλύτερη δυνατή εμπειρία, παίξτε με το zoom στο 100% ή χρησιμοποιήστε Chrome/Firefox.
 
 ---
 
