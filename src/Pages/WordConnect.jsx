@@ -172,8 +172,7 @@ const initLevel = useCallback(() => {
       opacity: '0.8',
       pointerEvents: 'none',
       zIndex: '1000',
-      transform: 'scale(1.1)',
-      boxShadow: '0 10px 20px rgba(0,0,0,0.3)',
+       boxShadow: '0 10px 20px rgba(0,0,0,0.3)',
       cursor: 'grabbing',
 // This is the specific fix for Safari:
   transform: 'scale(1.1) translateZ(0)', 
