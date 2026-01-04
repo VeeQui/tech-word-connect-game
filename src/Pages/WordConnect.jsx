@@ -180,7 +180,7 @@ const initLevel = useCallback(() => {
   WebkitBackfaceVisibility: 'hidden',
   WebkitPerspective: '1000',
    });
-    document.body.appendChild(ghost);
+    document.documentElement.appendChild(ghost);
     originalTile.style.opacity = '0.3';
 
     const onPointerMove = (moveEvent) => {
