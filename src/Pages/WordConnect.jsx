@@ -156,43 +156,56 @@ const initLevel = useCallback(() => {
     });
   };
 
- const handleStartDrag = (e, fromRow, fromSlot) => {
+const handleStartDrag = (e, fromRow, fromSlot) => {
   if (lockedGroups.some(lock => lock.row === fromRow)) return;
   
-  document.body.style.cursor = 'grabbing';
   const originalTile = e.currentTarget;
   const rect = originalTile.getBoundingClientRect();
-  
-  const ghost = originalTile.cloneNode(true);
-  
-  // Set initial styles
+  const text = originalTile.innerText; // Get text only
+
+  // 1. Create a NEW div instead of cloning (prevents CSS baggage)
+  const ghost = document.createElement('div');
+  ghost.innerText = text;
+
+  // 2. Apply styles directly to ensure Safari doesn't "miss" them
   Object.assign(ghost.style, {
     position: 'fixed',
     left: '0px',
     top: '0px',
     width: `${rect.width}px`,
     height: `${rect.height}px`,
-    opacity: '0.8',
+    backgroundColor: '#ececec', // Match your tile color
+    border: '2px solid purple',
+    borderRadius: '8px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '16px',
+    fontWeight: 'bold',
+    fontFamily: 'myGameFont',
+    color: '#333',
+    zIndex: '20000',
     pointerEvents: 'none',
-    zIndex: '10000',
-    // We use translate3d to position it exactly where the original was
-    transform: `translate3d(${rect.left}px, ${rect.top}px, 0) scale(1.1)`,
+    opacity: '0.9',
+    boxShadow: '0 10px 20px rgba(0,0,0,0.4)',
+    // The "Safari Special" transform
     WebkitTransform: `translate3d(${rect.left}px, ${rect.top}px, 0) scale(1.1)`,
-    boxShadow: '0 10px 20px rgba(0,0,0,0.3)',
-    transition: 'none', // Critical: stop any CSS transitions from lagging the ghost
+    transform: `translate3d(${rect.left}px, ${rect.top}px, 0) scale(1.1)`,
+    WebkitBackfaceVisibility: 'hidden',
+    transition: 'none',
   });
 
+  // 3. Append to body and hide original
   document.body.appendChild(ghost);
-  originalTile.style.opacity = '0.3';
+  originalTile.style.visibility = 'hidden'; // Use visibility instead of opacity
 
   const onPointerMove = (moveEvent) => {
-    // Calculate center of ghost relative to mouse
     const x = moveEvent.clientX - rect.width / 2;
     const y = moveEvent.clientY - rect.height / 2;
 
-    // Update position via transform (smoothest for all browsers)
-    ghost.style.transform = `translate3d(${x}px, ${y}px, 0) scale(1.1)`;
+    // Direct transform update
     ghost.style.WebkitTransform = `translate3d(${x}px, ${y}px, 0) scale(1.1)`;
+    ghost.style.transform = `translate3d(${x}px, ${y}px, 0) scale(1.1)`;
 
     const elementAtPoint = document.elementFromPoint(moveEvent.clientX, moveEvent.clientY);
     const targetTile = elementAtPoint?.closest('[data-row]');
@@ -207,11 +220,11 @@ const initLevel = useCallback(() => {
   };
 
   const onPointerUp = (upEvent) => {
-    document.body.style.cursor = 'default';
-    if (document.body.contains(ghost)) {
-        document.body.removeChild(ghost); // This removes that "leftover clone"
+    // 4. Force Cleanup
+    if (ghost.parentNode) {
+      ghost.parentNode.removeChild(ghost);
     }
-    originalTile.style.opacity = '1';
+    originalTile.style.visibility = 'visible';
     setHoveredSlot(null);
 
     const elementAtPoint = document.elementFromPoint(upEvent.clientX, upEvent.clientY);
