@@ -156,78 +156,80 @@ const initLevel = useCallback(() => {
     });
   };
 
-  const handleStartDrag = (e, fromRow, fromSlot) => {
-    if (lockedGroups.some(lock => lock.row === fromRow)) return;
-    document.body.style.cursor = 'grabbing';
-    const originalTile = e.currentTarget;
-    const rect = originalTile.getBoundingClientRect();
-    const ghost = originalTile.cloneNode(true);
+ const handleStartDrag = (e, fromRow, fromSlot) => {
+  if (lockedGroups.some(lock => lock.row === fromRow)) return;
+  
+  document.body.style.cursor = 'grabbing';
+  const originalTile = e.currentTarget;
+  const rect = originalTile.getBoundingClientRect();
+  
+  const ghost = originalTile.cloneNode(true);
+  
+  // Set initial styles
+  Object.assign(ghost.style, {
+    position: 'fixed',
+    left: '0px',
+    top: '0px',
+    width: `${rect.width}px`,
+    height: `${rect.height}px`,
+    opacity: '0.8',
+    pointerEvents: 'none',
+    zIndex: '10000',
+    // We use translate3d to position it exactly where the original was
+    transform: `translate3d(${rect.left}px, ${rect.top}px, 0) scale(1.1)`,
+    WebkitTransform: `translate3d(${rect.left}px, ${rect.top}px, 0) scale(1.1)`,
+    boxShadow: '0 10px 20px rgba(0,0,0,0.3)',
+    transition: 'none', // Critical: stop any CSS transitions from lagging the ghost
+  });
+
+  document.body.appendChild(ghost);
+  originalTile.style.opacity = '0.3';
+
+  const onPointerMove = (moveEvent) => {
+    // Calculate center of ghost relative to mouse
+    const x = moveEvent.clientX - rect.width / 2;
+    const y = moveEvent.clientY - rect.height / 2;
+
+    // Update position via transform (smoothest for all browsers)
+    ghost.style.transform = `translate3d(${x}px, ${y}px, 0) scale(1.1)`;
+    ghost.style.WebkitTransform = `translate3d(${x}px, ${y}px, 0) scale(1.1)`;
+
+    const elementAtPoint = document.elementFromPoint(moveEvent.clientX, moveEvent.clientY);
+    const targetTile = elementAtPoint?.closest('[data-row]');
     
-    Object.assign(ghost.style, {
-      position: 'fixed',
-      left: `${rect.left}px`,
-      top: `${rect.top}px`,
-      width: `${rect.width}px`,
-      height: `${rect.height}px`,
-      opacity: '0.99',
-      pointerEvents: 'none',
-      zIndex: '1000',
-       boxShadow: '0 10px 20px rgba(0,0,0,0.3)',
-      cursor: 'grabbing',
-// This is the specific fix for Safari:
- WebkitTransform: 'scale(1.1) translateZ(0)',
-  transform: 'scale(1.1) translateZ(0)',
-  WebkitBackfaceVisibility: 'hidden',
-  WebkitPerspective: '1000',
-   });
-    document.documentElement.appendChild(ghost);
-    originalTile.style.opacity = '0.3';
-
-    const onPointerMove = (moveEvent) => {
-// 1. Detect if the board is currently scaled
-  const board = document.querySelector('[style*="transform"]'); // Or use a ref
-  const scale = window.innerWidth < 650 ? window.innerWidth / 650 : 1;
-
-  // 2. Adjust the positioning math
-  // We divide by the scale to "normalize" the mouse movement
-  ghost.style.left = `${moveEvent.clientX - (rect.width * scale) / 2 +2}px`;
-  ghost.style.top = `${moveEvent.clientY - (rect.height * scale) / 2 +2}px`;
-      const elementAtPoint = document.elementFromPoint(moveEvent.clientX, moveEvent.clientY);
-      const targetTile = elementAtPoint?.closest('[data-row]');
-      if (targetTile) {
-        const row = parseInt(targetTile.dataset.row);
-        const slot = parseInt(targetTile.dataset.slot);
-        if (!lockedGroups.some(lock => lock.row === row)) {
-          setHoveredSlot({ row, slot }); 
-        } else {
-          setHoveredSlot(null);
-        }
-      } else {
-        setHoveredSlot(null);
-      }
-    };
-
-    const onPointerUp = (upEvent) => {
-      document.body.style.cursor = 'default';
-      if (document.body.contains(ghost)) document.body.removeChild(ghost);
-      originalTile.style.opacity = '1';
+    if (targetTile) {
+      const row = parseInt(targetTile.dataset.row);
+      const slot = parseInt(targetTile.dataset.slot);
+      setHoveredSlot(lockedGroups.some(l => l.row === row) ? null : { row, slot });
+    } else {
       setHoveredSlot(null);
-      const elementAtPoint = document.elementFromPoint(upEvent.clientX, upEvent.clientY);
-      const targetTile = elementAtPoint?.closest('[data-row]');
-      if (targetTile) {
-        const toRow = parseInt(targetTile.dataset.row);
-        const toSlot = parseInt(targetTile.dataset.slot);
-        if (!lockedGroups.some(lock => lock.row === toRow)) {
-          moveWord({ group: fromRow, slot: fromSlot }, { group: toRow, slot: toSlot });
-        }
-      }
-      window.removeEventListener('pointermove', onPointerMove);
-      window.removeEventListener('pointerup', onPointerUp);
-    };
-    window.addEventListener('pointermove', onPointerMove);
-    window.addEventListener('pointerup', onPointerUp);
+    }
   };
 
+  const onPointerUp = (upEvent) => {
+    document.body.style.cursor = 'default';
+    if (document.body.contains(ghost)) {
+        document.body.removeChild(ghost); // This removes that "leftover clone"
+    }
+    originalTile.style.opacity = '1';
+    setHoveredSlot(null);
+
+    const elementAtPoint = document.elementFromPoint(upEvent.clientX, upEvent.clientY);
+    const targetTile = elementAtPoint?.closest('[data-row]');
+    if (targetTile) {
+      const toRow = parseInt(targetTile.dataset.row);
+      const toSlot = parseInt(targetTile.dataset.slot);
+      if (!lockedGroups.some(lock => lock.row === toRow)) {
+        moveWord({ group: fromRow, slot: fromSlot }, { group: toRow, slot: toSlot });
+      }
+    }
+    window.removeEventListener('pointermove', onPointerMove);
+    window.removeEventListener('pointerup', onPointerUp);
+  };
+
+  window.addEventListener('pointermove', onPointerMove);
+  window.addEventListener('pointerup', onPointerUp);
+};
   const handleNextLevel = () => {
     if (levelIndex < LEVELS.length - 1) {
       const nextIdx = levelIndex + 1;
