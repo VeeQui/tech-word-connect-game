@@ -169,12 +169,27 @@ const initLevel = useCallback(() => {
       top: `${rect.top}px`,
       width: `${rect.width}px`,
       height: `${rect.height}px`,
-      opacity: '0.8',
+   //   opacity: '0.8',
       pointerEvents: 'none',
-      zIndex: '1000',
-      transform: 'scale(1.1)',
+   //   zIndex: '1000',
+   //   transform: 'scale(1.1)',
       boxShadow: '0 10px 20px rgba(0,0,0,0.3)',
       cursor: 'grabbing',
+
+// 1. Force Safari to treat this as a separate hardware layer
+  WebkitTransform: 'translateZ(0px) scale(1.1)',
+  transform: 'translateZ(0px) scale(1.1)',
+
+  // 2. Prevent Safari from "optimizing" the tile into invisibility
+  WebkitBackfaceVisibility: 'hidden',
+  backfaceVisibility: 'hidden',
+
+  // 3. Set opacity to 0.99 (Safari sometimes ignores 'fixed' elements with < 0.9 opacity)
+  opacity: '0.99', 
+  
+  // Ensure z-index is extremely high
+  zIndex: '99999',
+}
 
     });
     document.body.appendChild(ghost);
