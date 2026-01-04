@@ -181,8 +181,14 @@ const initLevel = useCallback(() => {
     originalTile.style.opacity = '0.3';
 
     const onPointerMove = (moveEvent) => {
-      ghost.style.left = `${moveEvent.clientX - rect.width / 2}px`;
-      ghost.style.top = `${moveEvent.clientY - rect.height / 2}px`;
+// 1. Detect if the board is currently scaled
+  const board = document.querySelector('[style*="transform"]'); // Or use a ref
+  const scale = window.innerWidth < 650 ? window.innerWidth / 650 : 1;
+
+  // 2. Adjust the positioning math
+  // We divide by the scale to "normalize" the mouse movement
+  ghost.style.left = `${moveEvent.clientX - (rect.width * scale) / 2}px`;
+  ghost.style.top = `${moveEvent.clientY - (rect.height * scale) / 2}px`;
       const elementAtPoint = document.elementFromPoint(moveEvent.clientX, moveEvent.clientY);
       const targetTile = elementAtPoint?.closest('[data-row]');
       if (targetTile) {
@@ -480,8 +486,7 @@ gameBoardContainer: {
   width: "100%",
   maxWidth: "632px",
   margin: "0 auto",
-  /* The "Safe Zoom" */
-  zoom: window.innerWidth < 650 ? "0.8" : "1",  //width (650) should be adjusted to game container
-  WebkitZoom: window.innerWidth < 650 ? "0.8" : "1", // Specific for Safari - width (650) should be adjusted to game container
+transform: window.innerWidth < 650 ? `scale(${window.innerWidth / 650})` : "scale(1)",
+  transformOrigin: "top center",
 }
 };
